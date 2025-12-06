@@ -4,12 +4,10 @@
 <head>
     <title>Text Image (text-image.js)</title>
     <meta charset="utf-8" />
-    <meta http-equiv='Content-Type' content='text/html; charset=utf-8' />
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Dancing+Script">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link rel="stylesheet" type="text/css" href="../demo/css/style.css">
     <script src="../dist/text-image.js"></script>
@@ -19,141 +17,198 @@
 <body>
     <div class="container">
         <header>
-            <h1>Text Image<br><small>(text-image.js)</small></h1>
-            <a href="https://github.com/vincent7128/text-image" class="fork-me"><img src='../demo/img/fork-me.png'/></a>
+            <h1>Text Image</h1>
         </header>
-        <hr>
+
         <form>
-            <div class="form-group">
-                <textarea name="image-text" class="form-control" placeholder="Type here...">Change this text create your image
+            <!-- Compact Settings Panel -->
+            <div class="settings-panel">
+                <!-- Row 1: Typography & Colors -->
+                <div class="settings-row">
+                    <div class="settings-group">
+                        <label>Font</label>
+                        <select name="font-family">
+                            <option value="sans-serif">Sans-serif</option>
+                            <option value="serif">Serif</option>
+                            <option value="monospace">Monospace</option>
+                            <option value="Arial">Arial</option>
+                            <option value="Helvetica">Helvetica</option>
+                            <option value="'Dancing Script', cursive">Dancing Script</option>
+                            <option selected value="FontAwesome,'Helvetica Neue',Helvetica,Arial,sans-serif">FontAwesome+</option>
+                        </select>
+                    </div>
 
-This is a simple placeholder that you can swap out whenever you're ready.
+                    <div class="settings-group">
+                        <label>Size</label>
+                        <input name="font-size" type="number" value="16" min="8" max="120"/>
+                    </div>
 
-Feel free to adjust the wording to better match your project style.
-</textarea>
-            </div>
-            <div class="image-display text-center">
-                <a class="image-download btn btn-success" target="_blank" download="text-image.png">download image</a>
-            </div>
-            <div class="form-group">
-                <label>Filename:</label>
-                <input name="filename" type="text" class="form-control" placeholder="leave blank to automatically generate"/>
-            </div>
-            <div class="form-group">
-                <label class="form-check-label">Show grid line: <input name="grid-line" type="checkbox"/></label>
-            </div>
-            <div class="form-group">
-                <label>Font size:</label>
-                <input name="font-size" type="number" value="16" min="16" max="64"/>
-            </div>
-            <div class="form-group">
-                <label>Font align:</label>
-                <select name="font-align">
-                    <option selected value="left">left</option>
-                    <option value="center">center</option>
-                    <option value="right">right</option>
-                </select>
-            </div>
-            <div class="form-group">
-                <label>Font color:</label>
-                <label><img src="../demo/img/black.png"/> <input name="font-color" type="radio" value="rgba(0, 0, 0, 1)" checked></label>
-                <label><img src="../demo/img/white.png"/> <input name="font-color" type="radio" value="rgba(255, 255, 255, 1)"></label>
-                <label><img src="../demo/img/red.png"/> <input name="font-color" type="radio" value="rgba(255, 0, 0, 1)"></label>
-                <label><img src="../demo/img/orange.png"/> <input name="font-color" type="radio" value="rgba(255, 127, 0, 1)"></label>
-                <label><img src="../demo/img/yellow.png"/> <input name="font-color" type="radio" value="rgba(255, 255, 0, 1)"></label>
-                <label><img src="../demo/img/green.png"/> <input name="font-color" type="radio" value="rgba(0, 255, 0, 1)"></label>
-                <label><img src="../demo/img/blue.png"/> <input name="font-color" type="radio" value="rgba(0, 0, 255, 1)"></label>
-                <label><img src="../demo/img/indigo.png"/> <input name="font-color" type="radio" value="rgba(75, 0, 130, 1)"></label>
-                <label><img src="../demo/img/violet.png"/> <input name="font-color" type="radio" value="rgba(149, 0, 211, 1)"></label>
-            </div>
-            <div class="form-group">
-                <label>Background color:</label>
-                <label><img src="../demo/img/black.png"/> <input name="background-color" type="radio" value="rgba(0, 0, 0, 1)"></label>
-                <label><img src="../demo/img/white.png"/> <input name="background-color" type="radio" value="rgba(255, 255, 255, 1)" checked></label>
-                <label><img src="../demo/img/red.png"/> <input name="background-color" type="radio" value="rgba(255, 0, 0, 1)"></label>
-                <label><img src="../demo/img/orange.png"/> <input name="background-color" type="radio" value="rgba(255, 127, 0, 1)"></label>
-                <label><img src="../demo/img/yellow.png"/> <input name="background-color" type="radio" value="rgba(255, 255, 0, 1)"></label>
-                <label><img src="../demo/img/green.png"/> <input name="background-color" type="radio" value="rgba(0, 255, 0, 1)"></label>
-                <label><img src="../demo/img/blue.png"/> <input name="background-color" type="radio" value="rgba(0, 0, 255, 1)"></label>
-                <label><img src="../demo/img/indigo.png"/> <input name="background-color" type="radio" value="rgba(75, 0, 130, 1)"></label>
-                <label><img src="../demo/img/violet.png"/> <input name="background-color" type="radio" value="rgba(149, 0, 211, 1)"></label>
-                <label><img src="../demo/img/transparent.png"/> <input name="background-color" type="radio" value="rgba(0, 0, 0, 0)"></label>
-            </div>
-            <div class="form-group">
-                <label class="form-check-label">Word wrap: <input name="word-wrap" type="checkbox" checked='true'/></label>
-            </div>
-            <div class="form-group">
-                <label>Image width (px):</label>
-                <input name="max-width" type="number" value="600" min="100" max="2000"/>
-            </div>
-            <div class="form-group">
-                <label>Padding - all sides (px):</label>
-                <input name="padding" type="number" value="20" min="0" max="200"/>
-            </div>
-            <div class="form-group">
-                <label>Padding - individual sides (px):</label>
-                <div style="margin-left: 20px;">
-                    <label>Top: <input name="padding-top" type="number" min="0" max="200" style="width: 80px;"/></label>
-                    <label>Right: <input name="padding-right" type="number" min="0" max="200" style="width: 80px;"/></label>
-                    <label>Bottom: <input name="padding-bottom" type="number" min="0" max="200" style="width: 80px;"/></label>
-                    <label>Left: <input name="padding-left" type="number" min="0" max="200" style="width: 80px;"/></label>
+                    <button type="button" class="toggle-btn" data-target="bold">B</button>
+                    <button type="button" class="toggle-btn" data-target="italic" style="font-style: italic;">I</button>
+                    <input type="hidden" name="bold" value="false">
+                    <input type="hidden" name="italic" value="false">
+
+                    <div class="align-buttons">
+                        <button type="button" class="align-btn active" data-align="left" title="Align Left">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M2 3h12v1.5H2V3zm0 4h8v1.5H2V7zm0 4h10v1.5H2V11z"/></svg>
+                        </button>
+                        <button type="button" class="align-btn" data-align="center" title="Align Center">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M2 3h12v1.5H2V3zm2 4h8v1.5H4V7zm1 4h6v1.5H5V11z"/></svg>
+                        </button>
+                        <button type="button" class="align-btn" data-align="right" title="Align Right">
+                            <svg width="16" height="16" viewBox="0 0 16 16" fill="currentColor"><path d="M2 3h12v1.5H2V3zm4 4h8v1.5H6V7zm2 4h6v1.5H8V11z"/></svg>
+                        </button>
+                        <input type="hidden" name="font-align" value="left">
+                    </div>
+
+                    <div class="settings-divider"></div>
+
+                    <!-- Text Color Dropdown -->
+                    <div class="color-dropdown" data-target="font-color">
+                        <input type="hidden" name="font-color" value="rgba(0, 0, 0, 1)">
+                        <button type="button" class="color-dropdown-btn">
+                            <span class="color-preview" style="background: #000"></span>
+                            <span>Text</span>
+                        </button>
+                        <div class="color-dropdown-panel">
+                            <div class="color-swatches">
+                                <button type="button" class="swatch active" data-color="rgba(0, 0, 0, 1)" style="background: #000"></button>
+                                <button type="button" class="swatch" data-color="rgba(255, 255, 255, 1)" style="background: #fff"></button>
+                                <button type="button" class="swatch" data-color="rgba(255, 0, 0, 1)" style="background: #f00"></button>
+                                <button type="button" class="swatch" data-color="rgba(255, 127, 0, 1)" style="background: #ff7f00"></button>
+                                <button type="button" class="swatch" data-color="rgba(255, 255, 0, 1)" style="background: #ff0"></button>
+                                <button type="button" class="swatch" data-color="rgba(0, 255, 0, 1)" style="background: #0f0"></button>
+                                <button type="button" class="swatch" data-color="rgba(0, 0, 255, 1)" style="background: #00f"></button>
+                                <button type="button" class="swatch" data-color="rgba(75, 0, 130, 1)" style="background: #4b0082"></button>
+                                <button type="button" class="swatch" data-color="rgba(149, 0, 211, 1)" style="background: #9500d3"></button>
+                                <button type="button" class="swatch" data-color="rgba(128, 128, 128, 1)" style="background: #808080"></button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Background Color Dropdown -->
+                    <div class="color-dropdown" data-target="background-color">
+                        <input type="hidden" name="background-color" value="rgba(255, 255, 255, 1)">
+                        <button type="button" class="color-dropdown-btn">
+                            <span class="color-preview" style="background: #fff"></span>
+                            <span>Background</span>
+                        </button>
+                        <div class="color-dropdown-panel">
+                            <div class="color-swatches">
+                                <button type="button" class="swatch" data-color="rgba(0, 0, 0, 1)" style="background: #000"></button>
+                                <button type="button" class="swatch active" data-color="rgba(255, 255, 255, 1)" style="background: #fff"></button>
+                                <button type="button" class="swatch" data-color="rgba(255, 0, 0, 1)" style="background: #f00"></button>
+                                <button type="button" class="swatch" data-color="rgba(255, 127, 0, 1)" style="background: #ff7f00"></button>
+                                <button type="button" class="swatch" data-color="rgba(255, 255, 0, 1)" style="background: #ff0"></button>
+                                <button type="button" class="swatch" data-color="rgba(0, 255, 0, 1)" style="background: #0f0"></button>
+                                <button type="button" class="swatch" data-color="rgba(0, 0, 255, 1)" style="background: #00f"></button>
+                                <button type="button" class="swatch" data-color="rgba(75, 0, 130, 1)" style="background: #4b0082"></button>
+                                <button type="button" class="swatch" data-color="rgba(149, 0, 211, 1)" style="background: #9500d3"></button>
+                                <button type="button" class="swatch" data-color="rgba(0, 0, 0, 0)" title="Transparent"></button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Row 2: Layout -->
+                <div class="settings-row">
+                    <div class="settings-group">
+                        <label>Padding (px)</label>
+                        <input name="padding" type="number" value="20" min="0" max="200"/>
+                    </div>
+
+                    <label class="checkbox-toggle">
+                        <input name="word-wrap" type="checkbox" checked/>
+                        Word Wrap
+                    </label>
+
+                    <div class="settings-group width-group">
+                        <label>Width (px)</label>
+                        <input name="max-width" type="number" value="600" min="100" max="2000"/>
+                    </div>
+
+                    <button type="button" class="reset-btn">Reset</button>
+                </div>
+
+                <!-- Advanced Options (expandable inside panel) -->
+                <div class="advanced-section-inline">
+                    <button type="button" class="advanced-toggle">Advanced Options</button>
+                    <div class="advanced-content">
+                        <div class="advanced-row">
+                            <div class="settings-group">
+                                <label>Line Height</label>
+                                <input name="line-height" type="number" step="0.1" value="1.2" style="width: 60px;"/>
+                                <select name="line-height-unit" style="width: 55px;">
+                                    <option value="em">em</option>
+                                    <option value="px">px</option>
+                                </select>
+                            </div>
+
+                            <div class="settings-group">
+                                <label>Stroke</label>
+                                <input name="stroke" type="number" value="0" min="0" max="20" style="width: 60px;"/>
+                            </div>
+
+                            <!-- Stroke Color Dropdown -->
+                            <div class="color-dropdown" data-target="stroke-color">
+                                <input type="hidden" name="stroke-color" value="rgba(255, 255, 255, 1)">
+                                <button type="button" class="color-dropdown-btn">
+                                    <span class="color-preview" style="background: #fff"></span>
+                                    <span>Stroke Color</span>
+                                </button>
+                                <div class="color-dropdown-panel">
+                                    <div class="color-swatches">
+                                        <button type="button" class="swatch" data-color="rgba(0, 0, 0, 1)" style="background: #000"></button>
+                                        <button type="button" class="swatch active" data-color="rgba(255, 255, 255, 1)" style="background: #fff"></button>
+                                        <button type="button" class="swatch" data-color="rgba(255, 0, 0, 1)" style="background: #f00"></button>
+                                        <button type="button" class="swatch" data-color="rgba(255, 127, 0, 1)" style="background: #ff7f00"></button>
+                                        <button type="button" class="swatch" data-color="rgba(0, 0, 255, 1)" style="background: #00f"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="padding-section">
+                            <label>Individual Padding (leave blank to use default)</label>
+                            <div class="padding-grid">
+                                <label>Top <input name="padding-top" type="number" min="0" max="200" placeholder="-"/></label>
+                                <label>Right <input name="padding-right" type="number" min="0" max="200" placeholder="-"/></label>
+                                <label>Bottom <input name="padding-bottom" type="number" min="0" max="200" placeholder="-"/></label>
+                                <label>Left <input name="padding-left" type="number" min="0" max="200" placeholder="-"/></label>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
-            <div class="form-group">
-                <label>Stroke:</label>
-                <input name="stroke" type="number" value="0" min="0"/>
+
+            <!-- Text Input -->
+            <div class="content-card">
+                <textarea name="image-text" placeholder="Type your text here...">Change this text create your image
+
+This is a simple placeholder that you can swap out whenever you're ready.</textarea>
             </div>
-            <div class="form-group">
-                <label>Stroke color:</label>
-                <label><img src="../demo/img/black.png"/> <input name="stroke-color" type="radio" value="rgba(0, 0, 0, 1)"></label>
-                <label><img src="../demo/img/white.png"/> <input name="stroke-color" type="radio" value="rgba(255, 255, 255, 1)" checked></label>
-                <label><img src="../demo/img/red.png"/> <input name="stroke-color" type="radio" value="rgba(255, 0, 0, 1)"></label>
-                <label><img src="../demo/img/orange.png"/> <input name="stroke-color" type="radio" value="rgba(255, 127, 0, 1)"></label>
-                <label><img src="../demo/img/yellow.png"/> <input name="stroke-color" type="radio" value="rgba(255, 255, 0, 1)"></label>
-                <label><img src="../demo/img/green.png"/> <input name="stroke-color" type="radio" value="rgba(0, 255, 0, 1)"></label>
-                <label><img src="../demo/img/blue.png"/> <input name="stroke-color" type="radio" value="rgba(0, 0, 255, 1)"></label>
-                <label><img src="../demo/img/indigo.png"/> <input name="stroke-color" type="radio" value="rgba(75, 0, 130, 1)"></label>
-                <label><img src="../demo/img/violet.png"/> <input name="stroke-color" type="radio" value="rgba(149, 0, 211, 1)"></label>
-            </div>
-            <div class="form-group">
-                <label>Font family:</label>
-                <select name="font-family">
-                    <option value="serif">serif</option>
-                    <option value="sans-serif">sans-serif</option>
-                    <option value="cursive">cursive</option>
-                    <option value="fantasy">fantasy</option>
-                    <option value="monospace">monospace</option>
-                    <option value="'Helvetica Neue'">Helvetica Neue</option>
-                    <option value="Helvetica">Helvetica</option>
-                    <option value="Arial">Arial</option>
-                    <option value="'Dancing Script', cursive">Dancing Script</option>
-                    <option selected value="FontAwesome,'Helvetica Neue',Helvetica,Arial,sans-serif">FontAwesome,&quot;Helvetica Neue&quot;,Helvetica,Arial,sans-serif</option>
-                </select>
-            </div>
-            <div>
-                <div class="form-group">
-                    <label>Line height:</label>
-                    <input name="line-height" type="number" step="0.1" value="1.2" />
-                    <select name="line-height-unit">
-                        <option value="em">em</option>
-                        <option value="px">px</option>
-                    </select>
+
+            <!-- Preview -->
+            <div class="preview-card">
+                <div class="image-display">
+                    <p>Preview will appear here</p>
+                </div>
+                <div class="download-row">
+                    <label class="filename-label">Filename</label>
+                    <input name="filename" type="text" placeholder="leave blank to auto-generate"/>
+                    <a class="btn-download image-download" target="_blank" download="text-image.png">Download</a>
                 </div>
             </div>
-            <div class="form-group">
-                <label class="form-check-label">Bold: <input name="bold" type="checkbox"/></label>
-            </div>
-            <div class="form-group">
-                <label class="form-check-label">Italic: <input name="italic" type="checkbox"/></label>
-            </div>
+
         </form>
+
         <footer>
             <hr>
-            <h3>License</h3>
-            <p>This project is licensed under the MIT License - see the <a href="https://github.com/vincent7128/text-image/blob/master/LICENSE">LICENSE</a> file for details<p>
-            <p><small>version: %_VERSION_%, page built @ %_DATE_%</small></p>
+            <p>This is a fork of <a href="https://github.com/vincent7128/text-image">text-image</a> by vincent7128, licensed under the MIT License.</p>
         </footer>
     </div>
+
+    <pre class="code-example"></pre>
 </body>
 
 </html>
