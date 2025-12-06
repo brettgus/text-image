@@ -23,6 +23,13 @@ function rgbaToHex(rgba) {
     return '#000000';
 }
 
+function hexToRgba(hex) {
+    var r = parseInt(hex.slice(1, 3), 16);
+    var g = parseInt(hex.slice(3, 5), 16);
+    var b = parseInt(hex.slice(5, 7), 16);
+    return 'rgba(' + r + ', ' + g + ', ' + b + ', 1)';
+}
+
 function isTransparent(rgba) {
     return rgba === 'rgba(0, 0, 0, 0)';
 }
@@ -77,8 +84,8 @@ function initColorDropdowns() {
         });
     });
     
-    // Handle swatch clicks
-    form.querySelectorAll('.color-dropdown .swatch').forEach(function(swatch) {
+    // Handle swatch clicks (exclude custom swatches)
+    form.querySelectorAll('.color-dropdown .swatch:not(.custom-swatch)').forEach(function(swatch) {
         swatch.addEventListener('click', function(e) {
             e.preventDefault();
             var dropdown = this.closest('.color-dropdown');
@@ -99,6 +106,21 @@ function initColorDropdowns() {
                 panel.classList.remove('show');
             });
         }
+    });
+    
+    // Handle custom color picker
+    form.querySelectorAll('.custom-color-input').forEach(function(input) {
+        input.addEventListener('input', function() {
+            var dropdown = this.closest('.color-dropdown');
+            var targetName = dropdown.getAttribute('data-target');
+            var colorValue = hexToRgba(this.value);
+            setColorValue(targetName, colorValue);
+        });
+        
+        input.addEventListener('change', function() {
+            var dropdown = this.closest('.color-dropdown');
+            dropdown.querySelector('.color-dropdown-panel').classList.remove('show');
+        });
     });
 }
 

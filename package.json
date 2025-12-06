@@ -3,6 +3,9 @@
   "version": "0.7.0",
   "description": "Convert text to image with javascript",
   "main": "dist/text-image.js",
+  "bin": {
+    "text-image": "./bin/text-image-cli.js"
+  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -21,6 +24,10 @@
     "url": "https://github.com/vincent7128/text-image/issues"
   },
   "homepage": "https://vincent7128.github.io/text-image/",
+  "dependencies": {
+    "@napi-rs/canvas": "^0.1.68",
+    "commander": "^11.1.0"
+  },
   "devDependencies": {
     "del": "^4.0.0",
     "gulp": "^4.0.0",

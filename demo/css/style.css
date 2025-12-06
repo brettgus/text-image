@@ -305,6 +305,31 @@ header h1 small {
     border: 2px solid #d2d2d7;
 }
 
+/* Custom color swatch */
+.custom-swatch {
+    display: inline-block;
+    background: url('../img/colorpicker.png') center/cover no-repeat;
+    position: relative;
+    cursor: pointer;
+    margin: 0;
+}
+
+.custom-swatch:hover {
+    transform: scale(1.1);
+}
+
+.custom-color-input {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    border: none;
+    padding: 0;
+}
+
 /* Hidden inputs for color values */
 input[name="font-color"],
 input[name="background-color"],
