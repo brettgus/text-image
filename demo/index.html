@@ -20,33 +20,27 @@
     <div class="container">
         <header>
             <h1>Text Image<br><small>(text-image.js)</small></h1>
-            <h2>Convert text to image.</h2>
-            <h2>Work with unicode and web font like <a href="http://fontawesome.io/">FontAwesome<i class="fa fa-link"></i></a>, you can use emoji too. 🚀</h2>
-            <div class="text-right">
-                <a href="https://github.com/vincent7128/text-image/archive/master.zip" class="btn btn-success">Download .zip</a>
-            </div>
             <a href="https://github.com/vincent7128/text-image" class="fork-me"><img src='../demo/img/fork-me.png'/></a>
         </header>
         <hr>
         <form>
             <div class="form-group">
-                <textarea name="image-text" class="form-control" placeholder="Type here...">Change this text create your image.
-更改文字創建您的圖案。
-このテキストを変更してイメージを作成します。
-이 텍스트를 변경하여 이미지를 만듭니다.
-Ändern Sie diesen Text, um Ihr Bild zu erstellen.
-Changez ce texte créez votre image.
-Cambia este texto crea tu imagen.
-Αλλάξτε αυτό το κείμενο δημιουργήστε την εικόνα σας.
-Ŝanĝi ĉi tiun tekston krei vian bildon.
-🌍 🚀 🌛
+                <textarea name="image-text" class="form-control" placeholder="Type here...">Change this text create your image
+
+This is a simple placeholder that you can swap out whenever you're ready.
+
+Feel free to adjust the wording to better match your project style.
 </textarea>
             </div>
             <div class="image-display text-center">
-                <a class="image-download btn btn-success" target="_blank" download="text-image-%_VERSION_%.js.png">download image</a>
+                <a class="image-download btn btn-success" target="_blank" download="text-image.png">download image</a>
             </div>
             <div class="form-group">
-                <label class="form-check-label">Show grid line: <input name="grid-line" type="checkbox" checked='true'/></label>
+                <label>Filename:</label>
+                <input name="filename" type="text" class="form-control" placeholder="leave blank to automatically generate"/>
+            </div>
+            <div class="form-group">
+                <label class="form-check-label">Show grid line: <input name="grid-line" type="checkbox"/></label>
             </div>
             <div class="form-group">
                 <label>Font size:</label>
@@ -75,7 +69,7 @@ Cambia este texto crea tu imagen.
             <div class="form-group">
                 <label>Background color:</label>
                 <label><img src="../demo/img/black.png"/> <input name="background-color" type="radio" value="rgba(0, 0, 0, 1)"></label>
-                <label><img src="../demo/img/white.png"/> <input name="background-color" type="radio" value="rgba(255, 255, 255, 1)"></label>
+                <label><img src="../demo/img/white.png"/> <input name="background-color" type="radio" value="rgba(255, 255, 255, 1)" checked></label>
                 <label><img src="../demo/img/red.png"/> <input name="background-color" type="radio" value="rgba(255, 0, 0, 1)"></label>
                 <label><img src="../demo/img/orange.png"/> <input name="background-color" type="radio" value="rgba(255, 127, 0, 1)"></label>
                 <label><img src="../demo/img/yellow.png"/> <input name="background-color" type="radio" value="rgba(255, 255, 0, 1)"></label>
@@ -83,7 +77,27 @@ Cambia este texto crea tu imagen.
                 <label><img src="../demo/img/blue.png"/> <input name="background-color" type="radio" value="rgba(0, 0, 255, 1)"></label>
                 <label><img src="../demo/img/indigo.png"/> <input name="background-color" type="radio" value="rgba(75, 0, 130, 1)"></label>
                 <label><img src="../demo/img/violet.png"/> <input name="background-color" type="radio" value="rgba(149, 0, 211, 1)"></label>
-                <label><img src="../demo/img/transparent.png"/> <input name="background-color" type="radio" value="rgba(0, 0, 0, 0)" checked></label>
+                <label><img src="../demo/img/transparent.png"/> <input name="background-color" type="radio" value="rgba(0, 0, 0, 0)"></label>
+            </div>
+            <div class="form-group">
+                <label class="form-check-label">Word wrap: <input name="word-wrap" type="checkbox" checked='true'/></label>
+            </div>
+            <div class="form-group">
+                <label>Image width (px):</label>
+                <input name="max-width" type="number" value="600" min="100" max="2000"/>
+            </div>
+            <div class="form-group">
+                <label>Padding - all sides (px):</label>
+                <input name="padding" type="number" value="20" min="0" max="200"/>
+            </div>
+            <div class="form-group">
+                <label>Padding - individual sides (px):</label>
+                <div style="margin-left: 20px;">
+                    <label>Top: <input name="padding-top" type="number" min="0" max="200" style="width: 80px;"/></label>
+                    <label>Right: <input name="padding-right" type="number" min="0" max="200" style="width: 80px;"/></label>
+                    <label>Bottom: <input name="padding-bottom" type="number" min="0" max="200" style="width: 80px;"/></label>
+                    <label>Left: <input name="padding-left" type="number" min="0" max="200" style="width: 80px;"/></label>
+                </div>
             </div>
             <div class="form-group">
                 <label>Stroke:</label>
@@ -133,84 +147,6 @@ Cambia este texto crea tu imagen.
                 <label class="form-check-label">Italic: <input name="italic" type="checkbox"/></label>
             </div>
         </form>
-        <hr>
-        <pre class="code-example"></pre>
-        <hr>
-        <h3>Usage</h3>
-        <p>NPM</p>
-        <pre>npm install text-image</pre>
-        <p>CDN</p>
-        <pre>&lt;script src="https://cdn.jsdelivr.net/npm/text-image/dist/text-image.js"&gt;&lt;/script&gt;</pre>
-        <p>Code example:</p>
-        <pre>// create new TextImage object
-var textImage1 = TextImage();
-
-// create new TextImage object with customize style
-var style = {
-    font: 'serif',
-    align: 'center',
-    color: 'red',
-    size: 18,
-    background: 'white',
-    stroke: 1,
-    strokeColor: 'rgba(0, 0, 0, 1)'
-};
-var textImage2 = TextImage(style);
-
-// convert text message to image element
-var img = textImage.toImage('MESSAGE');
-
-// convert text message to base64 dataURL
-var data = textImage.toDataURL(message);
-
-// change style
-textImage.setStyle(style);</pre>
-        <h3>Style object</h3>
-        <p>The default style object</p>
-        <pre>{
-font: 'Sans-serif',
-align: 'left',
-color: '#000000',
-size: 16,
-background: 'rgba(0, 0, 0, 0)',
-stroke: 0,
-strokeColor: '#FFFFFF',
-bold: false,
-italic: false
-}</pre>
-        <h4>font</h4>
-        <p>The font property like css font-family and you can use web fonts like FontAwesome.</p>
-        <h4>align</h4>
-        <p>The align property specifies the horizontal alignment of text, use 'left', 'center' or 'right'.</p>
-        <h4>color & background & strokeColor</h4>
-        <p>The color, background and strokeColor property like css color.</p>
-        <pre>/* &lt;named-color&gt; values */
-color: 'red'
-color: 'orange'
-color: 'tan'
-color: 'rebeccapurple'
-
-/* &lt;hex-color&gt; values */
-color: '#090'
-color: '#009900'
-color: '#090a'
-color: '#009900aa'
-
-/* &lt;rgb()&gt; values */
-color: 'rgb(34, 12, 64, 0.6)'
-color: 'rgba(34, 12, 64, 0.6)'
-color: 'rgb(34 12 64 / 0.6)'
-color: 'rgba(34 12 64 / 0.3)'
-
-/* &lt;hsl()&gt; values */
-color: 'hsl(30, 100%, 50%, 0.6)
-color: 'hsla(30, 100%, 50%, 0.6)
-color: 'hsl(30 100% 50% / 0.6)
-color: 'hsla(30 100% 50% / 0.6)</pre>
-        <h4>size & stroke</h4>
-        <p>The size and stroke property is the text size and outline width, only use numbers.</p>
-        <h4>lineHeight</h4>
-        <p>The lineHeight property like css line-height.</p>
         <footer>
             <hr>
             <h3>License</h3>

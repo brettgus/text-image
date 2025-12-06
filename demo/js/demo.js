@@ -107,7 +107,14 @@ var img = textImage.toImage(message);\
     textarea,
     gridLine,
     imageDisplay, imageDownload,
-    codeExample;
+    codeExample,
+    filenameInput;
+
+function generateFilename(text) {
+    var words = text.trim().split(/\s+/).slice(0, 4).join('-');
+    // Remove characters invalid for filenames
+    return words.replace(/[^a-zA-Z0-9\-_]/g, '').substring(0, 50) || 'text-image';
+}
 
 function init() {
     textImage = TextImage();
@@ -117,17 +124,19 @@ function init() {
     imageDisplay = form.querySelector('.image-display');
     imageDownload = form.querySelector('.image-download');
     codeExample = document.querySelector('.code-example');
+    filenameInput = form.querySelector('input[name="filename"]');
     form.addEventListener('change', updateImage, false);
     textarea.addEventListener('keyup', updateImage, false);
-    for (var i = Math.floor(Math.random() * fontawesomeList.length - 10),
-            l = i + 10; i < l; i++) {
-        textarea.value += fontawesomeList[i] + ' ';
-    }
+    filenameInput.addEventListener('keyup', updateImage, false);
     updateImage();
 }
 
 function updateImage() {
-    var style = {
+    var paddingTopVal = form.querySelector('input[name="padding-top"]').value,
+        paddingRightVal = form.querySelector('input[name="padding-right"]').value,
+        paddingBottomVal = form.querySelector('input[name="padding-bottom"]').value,
+        paddingLeftVal = form.querySelector('input[name="padding-left"]').value,
+        style = {
             font: form.querySelector('select[name="font-family"]').value,
             align: form.querySelector('select[name="font-align"]').value,
             color: form.querySelector('input[name="font-color"]:checked').value,
@@ -138,7 +147,14 @@ function updateImage() {
             lineHeight: form.querySelector('input[name="line-height"]').value +
                 form.querySelector('select[name="line-height-unit"]').value,
             bold: form.querySelector('input[name="bold"]').checked,
-            italic: form.querySelector('input[name="italic"]').checked
+            italic: form.querySelector('input[name="italic"]').checked,
+            wordWrap: form.querySelector('input[name="word-wrap"]').checked,
+            maxWidth: parseInt(form.querySelector('input[name="max-width"]').value),
+            padding: parseInt(form.querySelector('input[name="padding"]').value),
+            paddingTop: paddingTopVal !== '' ? parseInt(paddingTopVal) : null,
+            paddingRight: paddingRightVal !== '' ? parseInt(paddingRightVal) : null,
+            paddingBottom: paddingBottomVal !== '' ? parseInt(paddingBottomVal) : null,
+            paddingLeft: paddingLeftVal !== '' ? parseInt(paddingLeftVal) : null
         },
         message = textarea.value;
     if (!message) {
@@ -160,6 +176,10 @@ function updateImage() {
         }
         imageDisplay.innerHTML = this.outerHTML;
         imageDownload.href = this.src;
+        // Set download filename
+        var customFilename = filenameInput.value.trim();
+        var filename = customFilename || generateFilename(message);
+        imageDownload.setAttribute('download', filename + '.png');
         imageDisplay.appendChild(imageDownload);
     });
     var template = codeTemplate.replace('%MESSAGE%', JSON.stringify(textarea.value, null, 4));
