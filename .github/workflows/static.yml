@@ -33,7 +33,7 @@ jobs:
         uses: actions/checkout@v4
       - name: Build site
         run: |
-          sed -E 's|(href|src)="\.\./demo/|\1="|g; s|(href|src)="\.\./dist/|\1="dist/|g' demo/index.html > index.html
+          sed -E 's#(href|src)="\.\./demo/#\1="#g; s#(href|src)="\.\./dist/#\1="dist/#g' demo/index.html > index.html
       - name: Setup Pages
         uses: actions/configure-pages@v5
       - name: Upload artifact
