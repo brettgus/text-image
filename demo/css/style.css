@@ -462,6 +462,32 @@ textarea[name="image-text"]:focus {
     text-decoration: none;
 }
 
+/* Share button */
+.share-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: #fff;
+    color: #0071e3;
+    border: 1px solid #0071e3;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.share-btn:hover {
+    background: #f0f7ff;
+}
+
+.share-btn.copied {
+    background: #34c759;
+    border-color: #34c759;
+    color: #fff;
+}
+
 /* Advanced Section (inline within settings panel) */
 .advanced-section-inline {
     border-top: 1px solid #e8e8e8;
@@ -629,7 +655,8 @@ footer a {
         width: 100%;
     }
     
-    .btn-download {
+    .btn-download,
+    .share-btn {
         width: 100%;
         justify-content: center;
     }

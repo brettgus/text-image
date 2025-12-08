@@ -214,6 +214,98 @@ var defaultSettings = {
     paddingLeft: ''
 };
 
+// Share link functions
+var URL_WARNING_LENGTH = 2000;
+
+function getShareableURL() {
+    var settings = {
+        fontFamily: form.querySelector('select[name="font-family"]').value,
+        fontSize: form.querySelector('input[name="font-size"]').value,
+        bold: form.querySelector('input[name="bold"]').value,
+        italic: form.querySelector('input[name="italic"]').value,
+        fontAlign: form.querySelector('input[name="font-align"]').value,
+        fontColor: form.querySelector('input[name="font-color"]').value,
+        backgroundColor: form.querySelector('input[name="background-color"]').value,
+        padding: form.querySelector('input[name="padding"]').value,
+        wordWrap: form.querySelector('input[name="word-wrap"]').checked,
+        maxWidth: form.querySelector('input[name="max-width"]').value,
+        lineHeight: form.querySelector('input[name="line-height"]').value,
+        lineHeightUnit: form.querySelector('select[name="line-height-unit"]').value,
+        stroke: form.querySelector('input[name="stroke"]').value,
+        strokeColor: form.querySelector('input[name="stroke-color"]').value,
+        paddingTop: form.querySelector('input[name="padding-top"]').value,
+        paddingRight: form.querySelector('input[name="padding-right"]').value,
+        paddingBottom: form.querySelector('input[name="padding-bottom"]').value,
+        paddingLeft: form.querySelector('input[name="padding-left"]').value,
+        text: textarea.value
+    };
+    
+    // Use LZ-String compression for shorter URLs
+    var compressed = LZString.compressToEncodedURIComponent(JSON.stringify(settings));
+    var url = window.location.origin + window.location.pathname + '?c=' + compressed;
+    return url;
+}
+
+function loadSettingsFromURL() {
+    var params = new URLSearchParams(window.location.search);
+    var compressed = params.get('c');
+    
+    if (!compressed) return false;
+    
+    try {
+        var settings = JSON.parse(LZString.decompressFromEncodedURIComponent(compressed));
+        applySettings(settings);
+        if (settings.text !== undefined) {
+            textarea.value = settings.text;
+        }
+        return true;
+    } catch (e) {
+        console.error('Failed to load settings from URL', e);
+        return false;
+    }
+}
+
+function copyShareLink() {
+    var url = getShareableURL();
+    var shareBtn = form.querySelector('.share-btn');
+    var originalText = shareBtn.textContent;
+    
+    // Check URL length and warn if too long
+    if (url.length > URL_WARNING_LENGTH) {
+        var proceed = confirm(
+            'Warning: The share URL is ' + url.length + ' characters long.\n\n' +
+            'Very long URLs may not work correctly in all browsers or when shared on some platforms.\n\n' +
+            'Consider using shorter text for more reliable sharing.\n\n' +
+            'Copy anyway?'
+        );
+        if (!proceed) return;
+    }
+    
+    navigator.clipboard.writeText(url).then(function() {
+        shareBtn.textContent = 'Copied!';
+        shareBtn.classList.add('copied');
+        setTimeout(function() {
+            shareBtn.textContent = originalText;
+            shareBtn.classList.remove('copied');
+        }, 2000);
+    }).catch(function() {
+        // Fallback for older browsers
+        var input = document.createElement('input');
+        input.value = url;
+        document.body.appendChild(input);
+        input.select();
+        document.execCommand('copy');
+        document.body.removeChild(input);
+        
+        shareBtn.textContent = 'Copied!';
+        shareBtn.classList.add('copied');
+        setTimeout(function() {
+            shareBtn.textContent = originalText;
+            shareBtn.classList.remove('copied');
+        }, 2000);
+    });
+}
+
 function saveSettingsToCookie() {
     var settings = {
         fontFamily: form.querySelector('select[name="font-family"]').value,
@@ -373,8 +465,19 @@ function init() {
     initAdvancedToggle();
     initWordWrapToggle();
     
-    // Load saved settings from cookie
-    loadSettingsFromCookie();
+    // Load from URL params (priority) or cookie
+    if (!loadSettingsFromURL()) {
+        loadSettingsFromCookie();
+    }
+    
+    // Share button handler
+    var shareBtn = form.querySelector('.share-btn');
+    if (shareBtn) {
+        shareBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            copyShareLink();
+        });
+    }
     
     // Reset button handler
     var resetBtn = form.querySelector('.reset-btn');
